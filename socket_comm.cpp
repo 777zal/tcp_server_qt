@@ -21,6 +21,8 @@ void socket_comm::newConnection()
 {
     QTcpSocket *socket = server->nextPendingConnection();
 
+    qDebug() << "Get Peer IP:"+socket->peerAddress().toString();
+
     socket->write("hello client\r\n");
     socket->flush();
 

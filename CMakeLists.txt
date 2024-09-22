@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 
-project(socket_tcp VERSION 0.1 LANGUAGES CXX)
+project(tcp_server_qt VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
@@ -21,9 +21,10 @@ set(PROJECT_SOURCES
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
-    qt_add_executable(socket_tcp
+    qt_add_executable(tcp_server_qt
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
+
         socket_comm.h socket_comm.cpp
     )
 # Define target properties for Android with Qt 6 as:
@@ -32,28 +33,28 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
 # For more information, see https://doc.qt.io/qt-6/qt-add-executable.html#target-creation
 else()
     if(ANDROID)
-        add_library(socket_tcp SHARED
+        add_library(tcp_server_qt SHARED
             ${PROJECT_SOURCES}
         )
 # Define properties for Android with Qt 5 after find_package() calls as:
 #    set(ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/android")
     else()
-        add_executable(socket_tcp
+        add_executable(tcp_server_qt
             ${PROJECT_SOURCES}
         )
     endif()
 endif()
 
-target_link_libraries(socket_tcp PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
-target_link_libraries(socket_tcp PRIVATE Qt${QT_VERSION_MAJOR}::Network)
+target_link_libraries(tcp_server_qt PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+target_link_libraries(tcp_server_qt PRIVATE Qt${QT_VERSION_MAJOR}::Network)
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
 # If you are developing for iOS or macOS you should consider setting an
 # explicit, fixed bundle identifier manually though.
 if(${QT_VERSION} VERSION_LESS 6.1.0)
-  set(BUNDLE_ID_OPTION MACOSX_BUNDLE_GUI_IDENTIFIER com.example.socket_tcp)
+  set(BUNDLE_ID_OPTION MACOSX_BUNDLE_GUI_IDENTIFIER com.example.tcp_server_qt)
 endif()
-set_target_properties(socket_tcp PROPERTIES
+set_target_properties(tcp_server_qt PROPERTIES
     ${BUNDLE_ID_OPTION}
     MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
     MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
@@ -62,12 +63,12 @@ set_target_properties(socket_tcp PROPERTIES
 )
 
 include(GNUInstallDirs)
-install(TARGETS socket_tcp
+install(TARGETS tcp_server_qt
     BUNDLE DESTINATION .
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
 
 if(QT_VERSION_MAJOR EQUAL 6)
-    qt_finalize_executable(socket_tcp)
+    qt_finalize_executable(tcp_server_qt)
 endif()

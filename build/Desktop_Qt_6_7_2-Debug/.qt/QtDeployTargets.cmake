@@ -1,2 +1,2 @@
-set(__QT_DEPLOY_TARGET_socket_tcp_FILE /home/jal/Documents/qt_proj/socket_tcp/build/Desktop_Qt_6_7_2-Debug/socket_tcp)
-set(__QT_DEPLOY_TARGET_socket_tcp_TYPE EXECUTABLE)
+set(__QT_DEPLOY_TARGET_tcp_server_qt_FILE /home/jal/project/qt/tcp_server_qt/build/Desktop_Qt_6_7_2-Debug/tcp_server_qt)
+set(__QT_DEPLOY_TARGET_tcp_server_qt_TYPE EXECUTABLE)
